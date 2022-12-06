@@ -11,7 +11,7 @@ import {
 import { ApiKeyManager } from "@esri/arcgis-rest-request";
 import { geocode } from "@esri/arcgis-rest-geocoding";
 
-const DisplayAnImage = () => {
+const DisplayForm = () => {
   const [text, setText] = useState("");
   const [long, setLong] = useState("");
   const [lat, setLat] = useState("");
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DisplayAnImage;
+export default DisplayForm;
