@@ -17,13 +17,11 @@ const DisplayForm = () => {
   const [lat, setLat] = useState("");
   const [postal, setPostal] = useState("");
   const [theCoords, setTheCoords] = useState("");
-  const [theComma, setTheComma] = useState("");
   const [add, setAdd] = useState("");
-  const [theAdd, setTheAdd] = useState("");
 
   const testAPI = () => {
     const apiKey =
-      "YOUR_API_KEY";
+    "YOUR_API_KEY";
     const authentication = ApiKeyManager.fromKey(apiKey);
     geocode({
       address: text,
@@ -33,10 +31,8 @@ const DisplayForm = () => {
       .then((response) => {
         setLong(Math.round(response.candidates[0].location.x * 10000) / 10000);
         setLat(Math.round(response.candidates[0].location.y * 10000) / 10000);
-        setAdd(response.candidates[0].address);
-        setTheCoords("Coordinates: ");
-        setTheComma(", ");
-        setTheAdd("Address: ");
+        setAdd(`Address: ${response.candidates[0].address}`);
+        setTheCoords(`Coordinates: ${long}, ${lat}`);
       })
       .catch(function (error) {
         console.log(error.message);
@@ -65,12 +61,8 @@ const DisplayForm = () => {
       </View>
       <Text style={styles.coords}>
         {theCoords}
-        {long}
-        {theComma}
-        {lat}
       </Text>
       <Text style={styles.coords}>
-        {theAdd}
         {add}
       </Text>
     </View>
