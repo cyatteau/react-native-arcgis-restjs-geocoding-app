@@ -1,12 +1,11 @@
 import { React, useState } from "react";
 import {
   View,
-  Image,
   StyleSheet,
   Text,
   Pressable,
   TextInput,
-  ScrollView,
+  Keyboard,
 } from "react-native";
 import { ApiKeyManager } from "@esri/arcgis-rest-request";
 import { geocode } from "@esri/arcgis-rest-geocoding";
@@ -20,8 +19,8 @@ const DisplayForm = () => {
   const [add, setAdd] = useState("");
 
   const testAPI = () => {
-    const apiKey =
-    "YOUR_API_KEY";
+    Keyboard.dismiss();
+    const apiKey = "YOUR_API_KEY";
     const authentication = ApiKeyManager.fromKey(apiKey);
     geocode({
       address: text,
@@ -42,7 +41,7 @@ const DisplayForm = () => {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.title}>ArcGIS Geocoding App</Text>
+        <Text style={styles.title}>ArcGIS REST JS Geocoding App</Text>
         <TextInput
           onChangeText={(value) => setText(value)}
           placeholder="Enter Street Address"
@@ -59,23 +58,21 @@ const DisplayForm = () => {
           <Text style={styles.text}>Get Location Info</Text>
         </Pressable>
       </View>
-      <Text style={styles.coords}>
-        {theCoords}
-      </Text>
-      <Text style={styles.coords}>
-        {add}
-      </Text>
+      <Text style={styles.coords}>{theCoords}</Text>
+      <Text style={styles.coords}>{add}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    paddingTop: 100,
+    alignItems: "center",
   },
   title: {
-    fontSize: 30,
+    fontSize: 27,
     textAlign: "center",
+    marginBottom: 10,
   },
   textInput: {
     fontSize: 20,
@@ -83,6 +80,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderColor: "#000000",
     borderWidth: 1,
+    width: 300,
   },
   press: {
     alignItems: "center",
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
     margin: 30,
   },
   text: {
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 21,
     fontWeight: "bold",
     letterSpacing: 0.25,
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   coords: {
-    fontSize: 17,
+    fontSize: 20,
     margin: 10,
   },
 });
