@@ -18,9 +18,10 @@ const DisplayForm = () => {
   const [theCoords, setTheCoords] = useState("");
   const [add, setAdd] = useState("");
 
-  const testAPI = () => {
+  const geoAddress = () => {
     Keyboard.dismiss();
-    const apiKey = "YOUR_API_KEY";
+    const apiKey =
+      "YOUR_API_KEY";
     const authentication = ApiKeyManager.fromKey(apiKey);
     geocode({
       address: text,
@@ -31,11 +32,18 @@ const DisplayForm = () => {
         setLong(Math.round(response.candidates[0].location.x * 10000) / 10000);
         setLat(Math.round(response.candidates[0].location.y * 10000) / 10000);
         setAdd(`Address: ${response.candidates[0].address}`);
-        setTheCoords(`Coordinates: ${long}, ${lat}`);
+        setCoordinates(
+          (Math.round(response.candidates[0].location.x * 10000) / 10000),
+          (Math.round(response.candidates[0].location.y * 10000) / 10000)
+        );
       })
       .catch(function (error) {
         console.log(error.message);
       });
+  };
+
+  const setCoordinates = (long, lat) => {
+    setTheCoords(`Coordinates: ${long}, ${lat}`);
   };
 
   return (
@@ -54,7 +62,7 @@ const DisplayForm = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Pressable onPress={testAPI} style={styles.press}>
+        <Pressable onPress={geoAddress} style={styles.press}>
           <Text style={styles.text}>Get Location Info</Text>
         </Pressable>
       </View>
@@ -70,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 27,
+    fontSize: 25,
     textAlign: "center",
     marginBottom: 10,
   },
